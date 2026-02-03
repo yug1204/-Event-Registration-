@@ -453,6 +453,26 @@ The module follows PSR-4 autoloading standards:
   - `src/Service/` → Services
   - `src/Controller/` → Controllers
 
+## Architecture Decisions
+
+### Custom Tables vs. Entity API
+
+**Decision**: Use custom database tables (`event_registration_events`, `event_registration_submissions`) operated via a Repository pattern instead of Drupal's node/entity system.
+
+**Reasoning**: 
+1. **Performance**: For a high-volume registration system, custom tables offer leaner SQL queries without the overhead of the Entity Field API.
+2. **Schema Control**: Full control over column types and indexing strategies (e.g., Composite index on `email` + `event_date`).
+3. **Simplicity**: The requirements are transactional rather than content-heavy. We do not need revisions, translations, or field UI for these records.
+
+### Dependency Injection
+
+**Decision**: Strict Use of Dependency Injection.
+
+**Reasoning**:
+- Removes hidden dependencies (`\Drupal::service()`).
+- Makes the classes (especially `EventRegistrationForm` and validators) easily testable with PHPUnit mocks.
+- Follows modern Drupal 10 best practices.
+
 ### AJAX Implementation
 
 Forms use Drupal's Form API `#ajax` property:
