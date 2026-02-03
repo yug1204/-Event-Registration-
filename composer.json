@@ -1,0 +1,19 @@
+{
+    "name": "custom/event_registration",
+    "description": "Custom Drupal 10 module for event registration with email notifications and admin management",
+    "type": "drupal-custom-module",
+    "license": "GPL-2.0-or-later",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Developer",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "drupal/core": "^10"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

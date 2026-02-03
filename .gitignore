@@ -1,0 +1,6 @@
+# Ignore vendor directory (if composer install is run locally)
+vendor/
+.idea/
+.vscode/
+*.log
+.DS_Store
