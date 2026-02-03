@@ -1,0 +1,38 @@
+event_registration.event_config:
+  path: '/admin/config/event-registration/events'
+  defaults:
+    _form: '\Drupal\event_registration\Form\EventConfigurationForm'
+    _title: 'Event Configuration'
+  requirements:
+    _permission: 'administer event registration'
+
+event_registration.register:
+  path: '/event-registration/register'
+  defaults:
+    _form: '\Drupal\event_registration\Form\EventRegistrationForm'
+    _title: 'Event Registration'
+  requirements:
+    _permission: 'access event registration form'
+
+event_registration.settings:
+  path: '/admin/config/event-registration/settings'
+  defaults:
+    _form: '\Drupal\event_registration\Form\AdminSettingsForm'
+    _title: 'Event Registration Settings'
+  requirements:
+    _permission: 'administer event registration'
+
+event_registration.registrations_list:
+  path: '/admin/event-registration/registrations'
+  defaults:
+    _controller: '\Drupal\event_registration\Controller\RegistrationListController::listRegistrations'
+    _title: 'Event Registrations'
+  requirements:
+    _permission: 'view event registrations'
+
+event_registration.export_csv:
+  path: '/admin/event-registration/export-csv'
+  defaults:
+    _controller: '\Drupal\event_registration\Controller\ExportController::exportCsv'
+  requirements:
+    _permission: 'view event registrations'
