@@ -1,0 +1,132 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Event Registration module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function event_registration_schema() {
+  $schema = [];
+
+  // Event configuration table.
+  $schema['event_registration_events'] = [
+    'description' => 'Stores event configuration details.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique event ID.',
+      ],
+      'registration_start_date' => [
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+        'description' => 'Event registration start date (YYYY-MM-DD).',
+      ],
+      'registration_end_date' => [
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+        'description' => 'Event registration end date (YYYY-MM-DD).',
+      ],
+      'event_date' => [
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+        'description' => 'Event date (YYYY-MM-DD).',
+      ],
+      'event_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Name of the event.',
+      ],
+      'category' => [
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'description' => 'Category of the event.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Timestamp when the event was created.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'category' => ['category'],
+      'event_date' => ['event_date'],
+    ],
+  ];
+
+  // Event registration submissions table.
+  $schema['event_registration_submissions'] = [
+    'description' => 'Stores user event registration submissions.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique submission ID.',
+      ],
+      'full_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Full name of the registrant.',
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Email address of the registrant.',
+      ],
+      'college_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'College name of the registrant.',
+      ],
+      'department' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Department of the registrant.',
+      ],
+      'category' => [
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'description' => 'Event category.',
+      ],
+      'event_date' => [
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+        'description' => 'Event date (YYYY-MM-DD).',
+      ],
+      'event_id' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Foreign key to event_registration_events.id',
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Timestamp when the registration was submitted.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'email_event_date' => ['email', 'event_date'],
+      'event_id' => ['event_id'],
+    ],
+  ];
+
+  return $schema;
+}

@@ -1,0 +1,12 @@
+administer event registration:
+  title: 'Administer event registration'
+  description: 'Manage event configurations and settings'
+  restrict access: true
+
+view event registrations:
+  title: 'View event registrations'
+  description: 'Access the admin listing page to view registrations'
+
+access event registration form:
+  title: 'Access event registration form'
+  description: 'Submit event registrations'
